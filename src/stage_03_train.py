@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import ElasticNet
 import joblib
 
-def split_and_save(config_path, params_path):
+def train_and_save(config_path, params_path):
     config = read_yaml(config_path)
     params = read_yaml(params_path)
     
@@ -30,6 +30,7 @@ def split_and_save(config_path, params_path):
     create_directory([model_fol])
     model_path = os.path.join(model_fol, model_file_name)
     joblib.dump(lr, model_path)
+    
 if __name__ == "__main__":
     args = argparse.ArgumentParser()
 
@@ -37,4 +38,4 @@ if __name__ == "__main__":
     args.add_argument("--params" , "-p", default = "params.yaml")
 
     parsed_args = args.parse_args()
-    split_and_save(config_path = parsed_args.config, params_path = parsed_args.params )
+    train_and_save(config_path = parsed_args.config, params_path = parsed_args.params )
